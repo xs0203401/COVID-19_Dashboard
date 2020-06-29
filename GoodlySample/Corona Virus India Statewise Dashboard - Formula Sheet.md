@@ -1,20 +1,20 @@
 # Corona Virus India Statewise Dashboard - Formula Sheet
 
 
-
-%Active = DIVIDE( [Active Cases TD] , [Total Cases TD] )
-
-
-%Deaths = DIVIDE([Deaths TD] , [Total Cases TD])
+## Measures
+`%Active` = DIVIDE( [Active Cases TD] , [Total Cases TD] )
 
 
-%Recovered = DIVIDE( [Recovered TD] , [Total Cases TD] )
+`%Deaths` = DIVIDE([Deaths TD] , [Total Cases TD])
 
 
-Active Cases = SUM(Data[Active Added])
+`%Recovered` = DIVIDE( [Recovered TD] , [Total Cases TD] )
 
 
-Active Cases State Rank = 
+`Active Cases` = SUM(Data[Active Added])
+
+
+`Active Cases State Rank` = 
 RANKX(
     ALL(Data[State]),
     [Active Cases TD],,
@@ -23,14 +23,14 @@ RANKX(
 )
 
 
-Active Cases TD = 
+`Active Cases TD` = 
 CALCULATE(
     SUM(Data[Active]),
     LASTDATE(Data[Date])
 )
 
 
-Active Cases World Rank = 
+`Active Cases World Rank` = 
 RANKX(
     ALL(World),
     CALCULATE(SUM(World[Active Cases])),
@@ -43,14 +43,14 @@ RANKX(
 )
 
 
-Cases Yesterday = 
+`Cases Yesterday` = 
 CALCULATE(
     [Total Cases TD],
     DATEADD('Calendar'[Date],-1,DAY)
 )
 
 
-CF Measure = 
+`CF Measure` = 
 IF(
     MAXX(
         ALL(Data[State]),
@@ -60,7 +60,7 @@ IF(
 )
 
 
-Compounded Growth% - Last 15 Days = 
+`Compounded Growth% - Last 15 Days` = 
 VAR DaysofGrowth = 15
 VAR LastCaseDate = 
     CALCULATE(
@@ -91,10 +91,10 @@ RETURN
     DailyCompoundedGrowth
 
 
-Deaths = SUM(Data[Deaths Added])
+`Deaths` = SUM(Data[Deaths Added])
 
 
-Deaths TD = 
+`Deaths TD` = 
 IF(
     HASONEVALUE(Data[State]),
     MAX(Data[Deaths]),
@@ -105,7 +105,7 @@ IF(
 )
 
 
-Distribution = 
+`Distribution` = 
 VAR MinNum = MIN('Range Table'[Lower])
 VAR MaxNum = MIN('Range Table'[Upper])
 VAR CheckState = HASONEVALUE(Data[State])
@@ -150,7 +150,7 @@ RETURN
     )
 
 
-Growth from Yesterday = 
+`Growth from Yesterday` = 
 VAR casestd = [Total Cases TD]
 VAR casesyesterday = 
     CALCULATE(
@@ -165,10 +165,10 @@ RETURN
     )
 
 
-GrowthRate = SELECTEDVALUE(GrowthRateTable[Value])/100
+`GrowthRate` = SELECTEDVALUE(GrowthRateTable[Value])/100
 
 
-Max Cases Added on = 
+`Max Cases Added on` = 
 CONCATENATEX(
     TOPN(
         1,
@@ -183,7 +183,7 @@ CONCATENATEX(
 )
 
 
-Max Increase State = 
+`Max Increase State` = 
 VAR StateTable = 
     FILTER(
         ALL(Data[State]),
@@ -210,7 +210,7 @@ MAXX(
 ) & " Cases added"
 
 
-Projected Cases Date Tag = 
+`Projected Cases Date Tag` = 
 VAR MaxDataDate = 
     CALCULATE(
         MAX(Data[Date]),
@@ -231,7 +231,7 @@ FORMAT(
 )
 
 
-Projection Cases = 
+`Projection Cases` = 
 VAR ProjectionOnOff = SELECTEDVALUE('On/Off Table'[Label],"Off")
 VAR GrowthRate = 
     IF(
@@ -282,7 +282,7 @@ IF(
 )
 
 
-Projection Cases Label = 
+`Projection Cases Label` = 
 VAR ProjectionOnOff = SELECTEDVALUE('On/Off Table'[Label],"Off")
 VAR GrowthRate = 
     IF(
@@ -331,10 +331,10 @@ IF(
 )
 
 
-Recovered = SUM(Data[Recovered Added])
+`Recovered` = SUM(Data[Recovered Added])
 
 
-Recovered TD = 
+`Recovered TD` = 
 IF(
     HASONEVALUE(Data[State]),
     MAX(Data[Recovered]),
@@ -345,7 +345,7 @@ IF(
 )
 
 
-Refreshed = 
+`Refreshed` = 
 "Data Until " & 
 FORMAT(
     CALCULATE(
@@ -361,10 +361,10 @@ FORMAT(
 )
 
 
-Total Cases = SUM(Data[Total Added])
+`Total Cases` = SUM(Data[Total Added])
 
 
-Total Cases TD = 
+`Total Cases TD` = 
 IF(
     HASONEVALUE(Data[State]),
     MAX(Data[Total]),
@@ -375,10 +375,10 @@ IF(
 )
 
 
-World Active Cases = SUM(World[Active Cases])
+`World Active Cases` = SUM(World[Active Cases])
 
 
-Δ from yesterday = 
+`Δ from yesterday` = 
 [Total Cases TD] - 
 CALCULATE(
     [Total Cases TD],

@@ -2,10 +2,10 @@
 
 
 ## Measures
-ActiveTD = [ConfirmedTD] - [DeadTD] - [CuredTD]
+`ActiveTD` = [ConfirmedTD] - [DeadTD] - [CuredTD]
 
 
-ConfirmedGrowthRate_15D% = 
+`ConfirmedGrowthRate_15D%` =   
 VAR LastTime = MAX(DXYArea_province[updateTime])
 VAR LastConfirmed =
 CALCULATE(
@@ -21,7 +21,7 @@ CALCULATE(
 RETURN IFERROR(((LastConfirmed/LastConfirmed_15)^(1/15))-1,BLANK())
 
 
-ConfirmedTD = 
+`ConfirmedTD` =   
 CALCULATE(
     SUM(DXYArea_province[province_confirmedIncr]),
     FILTER(
@@ -31,10 +31,10 @@ CALCULATE(
 )
 
 
-ConfirmedTotal = SUM(DXYArea_province[province_confirmedIncr])
+`ConfirmedTotal` =   SUM(DXYArea_province[province_confirmedIncr])
 
 
-CuredTD = 
+`CuredTD` =   
 CALCULATE(
     SUM(DXYArea_province[province_curedIncr]),
     FILTER(
@@ -44,7 +44,7 @@ CALCULATE(
 )
 
 
-DeadTD = 
+`DeadTD` =   
 CALCULATE(
     SUM(DXYArea_province[province_deadIncr]),
     FILTER(
@@ -54,16 +54,16 @@ CALCULATE(
 )
 
 
-DeadTotal = SUM(DXYArea_province[province_deadIncr])
+`DeadTotal` =   SUM(DXYArea_province[province_deadIncr])
 
 
-DeathRateTD% = DIVIDE([DeadTD],[ConfirmedTD])
+`DeathRateTD%` =   DIVIDE([DeadTD],[ConfirmedTD])
 
 
-DeathRateTotal% = DIVIDE([DeadTotal],[ConfirmedTotal])
+`DeathRateTotal%` =   DIVIDE([DeadTotal],[ConfirmedTotal])
 
 
-ProvinceName = 
+`ProvinceName` =   
 VAR myConcatMode = IF(COUNTAX(RELATEDTABLE(DXYArea_provinceZipMap), DXYArea_provinceZipMap[province_zipCode])>3,1,0)
 VAR myText = IF(
     myConcatMode=1, 
@@ -85,36 +85,36 @@ VAR myText = IF(
 RETURN myText
 
 
-RecoveryRateTD% = DIVIDE([CuredTD],[ConfirmedTD])
+`RecoveryRateTD%` =   DIVIDE([CuredTD],[ConfirmedTD])
 
 
 
 ## Calculated Columns
-lag_updateTime = 
+`lag_updateTime` = 
 VAR myID = DXYArea_province[province_zipCode]
 VAR myLastDate= MAXX(FILTER(DXYArea_province,DXYArea_province[province_zipCode] = myID && DXYArea_province[updateTime] < EARLIER(DXYArea_province[updateTime])),[updateTime])
 RETURN MAXX(FILTER(DXYArea_province,DXYArea_province[province_zipCode] = myID && DXYArea_province[updateTime] = myLastDate), [updateTime])
 
 
-province_confirmedIncr = 
+`province_confirmedIncr` =   
 VAR myID = DXYArea_province[province_zipCode]
 VAR myLagConfirmed = SUMX(FILTER(DXYArea_province, DXYArea_province[province_zipCode] = myID && DXYArea_province[updateTime] = EARLIER(DXYArea_province[lag_updateTime])), [province_confirmedCount])
 RETURN (DXYArea_province[province_confirmedCount] - myLagConfirmed)
 
 
-province_curedIncr = 
+`province_curedIncr` =   
 VAR myID = DXYArea_province[province_zipCode]
 VAR myLagCured = SUMX(FILTER(DXYArea_province, DXYArea_province[province_zipCode] = myID && DXYArea_province[updateTime] = EARLIER(DXYArea_province[lag_updateTime])), [province_curedCount])
 RETURN (DXYArea_province[province_curedCount] - myLagCured)
 
 
-province_deadIncr = 
+`province_deadIncr` =   
 VAR myID = DXYArea_province[province_zipCode]
 VAR myLagDead = SUMX(FILTER(DXYArea_province, DXYArea_province[province_zipCode] = myID && DXYArea_province[updateTime] = EARLIER(DXYArea_province[lag_updateTime])), [province_deadCount])
 RETURN (DXYArea_province[province_deadCount] - myLagDead)
 
 
-province_suspectedIncr = 
+`province_suspectedIncr` =   
 VAR myID = DXYArea_province[province_zipCode]
 VAR myLagSuspected = SUMX(FILTER(DXYArea_province, DXYArea_province[province_zipCode] = myID && DXYArea_province[updateTime] = EARLIER(DXYArea_province[lag_updateTime])), [province_suspectedCount])
 RETURN (DXYArea_province[province_suspectedCount] - myLagSuspected)
