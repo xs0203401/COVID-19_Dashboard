@@ -15,22 +15,27 @@
 
 
 `Active Cases State Rank` = 
+```
 RANKX(
     ALL(Data[State]),
     [Active Cases TD],,
     DESC,
     Dense
 )
+```
 
 
 `Active Cases TD` = 
+```
 CALCULATE(
     SUM(Data[Active]),
     LASTDATE(Data[Date])
 )
+```
 
 
 `Active Cases World Rank` = 
+```
 RANKX(
     ALL(World),
     CALCULATE(SUM(World[Active Cases])),
@@ -41,16 +46,20 @@ RANKX(
     DESC,
     Dense
 )
+```
 
 
 `Cases Yesterday` = 
+```
 CALCULATE(
     [Total Cases TD],
     DATEADD('Calendar'[Date],-1,DAY)
 )
+```
 
 
 `CF Measure` = 
+```
 IF(
     MAXX(
         ALL(Data[State]),
@@ -58,9 +67,11 @@ IF(
     ) = [Δ from yesterday] && [Δ from yesterday] <> 0,
     1
 )
+```
 
 
 `Compounded Growth% - Last 15 Days` = 
+```
 VAR DaysofGrowth = 15
 VAR LastCaseDate = 
     CALCULATE(
@@ -89,12 +100,14 @@ VAR DailyCompoundedGrowth =
     IFERROR(((LastDayValue/PrevValue)^(1/DaysofGrowth))-1,BLANK())
 RETURN
     DailyCompoundedGrowth
+```
 
 
 `Deaths` = SUM(Data[Deaths Added])
 
 
 `Deaths TD` = 
+```
 IF(
     HASONEVALUE(Data[State]),
     MAX(Data[Deaths]),
@@ -103,9 +116,11 @@ IF(
         LASTDATE(Data[Date])
     )
 )
+```
 
 
 `Distribution` = 
+```
 VAR MinNum = MIN('Range Table'[Lower])
 VAR MaxNum = MIN('Range Table'[Upper])
 VAR CheckState = HASONEVALUE(Data[State])
@@ -148,9 +163,11 @@ RETURN
         MaxDate <> BLANK() && MinDate <> BLANK(),
         "In " & MAX( MaxDate - MinDate + 1 , BLANK()) & Label
     )
+```
 
 
 `Growth from Yesterday` = 
+```
 VAR casestd = [Total Cases TD]
 VAR casesyesterday = 
     CALCULATE(
@@ -163,12 +180,14 @@ RETURN
         HASONEVALUE('Calendar'[Date]),
         DIVIDE(casestd,casesyesterday) -1
     )
+```
 
 
 `GrowthRate` = SELECTEDVALUE(GrowthRateTable[Value])/100
 
 
 `Max Cases Added on` = 
+```
 CONCATENATEX(
     TOPN(
         1,
@@ -181,9 +200,11 @@ CONCATENATEX(
     FORMAT(Data[Date],"d-mmm") & " | " & [Total Cases],
     UNICHAR(10)
 )
+```
 
 
 `Max Increase State` = 
+```
 VAR StateTable = 
     FILTER(
         ALL(Data[State]),
@@ -208,9 +229,11 @@ MAXX(
     StateTable,
     [Δ from yesterday]
 ) & " Cases added"
+```
 
 
 `Projected Cases Date Tag` = 
+```
 VAR MaxDataDate = 
     CALCULATE(
         MAX(Data[Date]),
@@ -229,9 +252,11 @@ FORMAT(
     ),
     "dd-mmm"
 )
+```
 
 
 `Projection Cases` = 
+```
 VAR ProjectionOnOff = SELECTEDVALUE('On/Off Table'[Label],"Off")
 VAR GrowthRate = 
     IF(
@@ -280,9 +305,11 @@ IF(
         )
     )
 )
+```
 
 
 `Projection Cases Label` = 
+```
 VAR ProjectionOnOff = SELECTEDVALUE('On/Off Table'[Label],"Off")
 VAR GrowthRate = 
     IF(
@@ -329,12 +356,14 @@ IF(
         )
     )
 )
+```
 
 
 `Recovered` = SUM(Data[Recovered Added])
 
 
 `Recovered TD` = 
+```
 IF(
     HASONEVALUE(Data[State]),
     MAX(Data[Recovered]),
@@ -343,9 +372,11 @@ IF(
         LASTDATE(Data[Date])
     )
 )
+```
 
 
 `Refreshed` = 
+```
 "Data Until " & 
 FORMAT(
     CALCULATE(
@@ -359,12 +390,14 @@ FORMAT(
     MAX('Refresh'[Refresh]),
     "d-mmm hh:mm AM/PM"
 )
+```
 
 
 `Total Cases` = SUM(Data[Total Added])
 
 
 `Total Cases TD` = 
+```
 IF(
     HASONEVALUE(Data[State]),
     MAX(Data[Total]),
@@ -373,12 +406,14 @@ IF(
         LASTDATE(Data[Date])
     )
 )
+```
 
 
 `World Active Cases` = SUM(World[Active Cases])
 
 
 `Δ from yesterday` = 
+```
 [Total Cases TD] - 
 CALCULATE(
     [Total Cases TD],
@@ -388,3 +423,4 @@ CALCULATE(
         LASTDATE(Data[Date])-1
     )
 )
+```
