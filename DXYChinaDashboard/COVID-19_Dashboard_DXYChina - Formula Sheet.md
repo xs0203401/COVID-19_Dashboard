@@ -98,6 +98,16 @@ RETURN myText
 `RecoveryRateTD%` =   DIVIDE([CuredTD],[ConfirmedTD])
 
 
+`LasUpdateTime` = CALCULATE(MAX(DXYArea_province[updateTime]),ALL(DXYArea_province[updateTime]))
+
+
+`Txt_LastUpdated` = 
+```
+VAR myLastTime = CALCULATE(DXYArea_province[LasUpdateTime])
+RETURN "Last Update Time: " & myLastTime & " (UTC+8 China Standard Time)"
+```
+
+
 
 ## Calculated Columns
 `lag_updateTime` = 
