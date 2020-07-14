@@ -1,4 +1,4 @@
-# This is a Power BI Dashboard Project
+# This is a Power BI Live Dashboard Project
 
 ## Published Link [COVID-19_Dashboard_DXYChina](https://app.powerbi.com/view?r=eyJrIjoiYjg0M2FmNGYtOTU0Ni00NDI4LTg3YTAtMGEyNjA1YTUzMTE2IiwidCI6IjQ2NWIxNmI0LWRjYzMtNDIwNC05OWIwLTVjY2I2MDJiNzAyMSIsImMiOjN9)
 
