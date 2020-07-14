@@ -12,7 +12,6 @@ Extracted using Power Query and Power BI DAX
 ### Note
 
 - Contact Email: yaohuang.liu@outlook.com
-- PowerBI Account: yliu@yaohuang.onmicrosoft.com (NO email)
 
 ### Updates
 
