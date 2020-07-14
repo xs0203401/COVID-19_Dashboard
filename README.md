@@ -12,3 +12,5 @@ Datasource: [DXYChinaCrawler](https://github.com/BlankerL/DXY-COVID-19-Crawler)
 
 Note:
 - PowerBI Account: yliu@yaohuang.onmicrosoft.com (NO email)
+
+#### 20200713 Update - Updated Author & Tuned percentage graph layout
