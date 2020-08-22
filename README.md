@@ -2,12 +2,12 @@
 
 ## Published Link [COVID-19_Dashboard_DXYChina](https://app.powerbi.com/view?r=eyJrIjoiYjg0M2FmNGYtOTU0Ni00NDI4LTg3YTAtMGEyNjA1YTUzMTE2IiwidCI6IjQ2NWIxNmI0LWRjYzMtNDIwNC05OWIwLTVjY2I2MDJiNzAyMSIsImMiOjN9)
 
-### Datasource [DXYChinaCrawler](https://github.com/BlankerL/DXY-COVID-19-Crawler)
-Extracted using Power Query and Power BI DAX
-
 ### Screenshot Sample
 
 ![ScreenShotSample](DXYChinaDashboard/Annotation%202020-07-13%20224200.jpg)
+
+### Datasource [DXYChinaCrawler](https://github.com/BlankerL/DXY-COVID-19-Crawler)
+Extracted using Power Query and Power BI DAX
 
 ### Note
 
